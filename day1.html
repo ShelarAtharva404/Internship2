@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Even and Odd Number Filter</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: #fff;
+      margin: 0;
+      padding: 50px 0;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      max-width: 550px;
+      margin: auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: scale(1.01);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    input {
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-bottom: 15px;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #e67e22;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #d35400;
+    }
+
+    #result {
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+
+    .section {
+      margin-bottom: 10px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .section span {
+      color: #f1c40f;
+    }
+
+    ::placeholder {
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Even and Odd Number Filter</h2>
+    <input type="text" id="numberInput" placeholder="Enter numbers separated by commas">
+    <button onclick="filterNumbers()">Filter Numbers</button>
+    <div id="result">
+      <div class="section" id="evenResult"></div>
+      <div class="section" id="oddResult"></div>
+    </div>
+  </div>
+
+  <script>
+    const filterEvenNumbers = arr => arr.filter(num => num % 2 === 0);
+    const filterOddNumbers = arr => arr.filter(num => num % 2 !== 0);
+  
+    const filterNumbers = () => {
+      const input = document.getElementById('numberInput').value;
+      
+      const numberArray = input
+        .split(',')
+        .map(num => parseInt(num.trim()))
+        .filter(num => !isNaN(num));
+      
+      const [evenNumbers, oddNumbers] = [
+        filterEvenNumbers([...numberArray]),
+        filterOddNumbers([...numberArray])
+      ];
+  
+      const evenText = evenNumbers.length ? evenNumbers.join(', ') : 'None';
+      const oddText = oddNumbers.length ? oddNumbers.join(', ') : 'None';
+  
+      document.getElementById('evenResult').innerHTML = `<span>Even Numbers:</span> ${evenText}`;
+      document.getElementById('oddResult').innerHTML = `<span>Odd Numbers:</span> ${oddText}`;
+    };
+  </script>
+  
+
+</body>
+</html>
+
